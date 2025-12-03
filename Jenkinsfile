@@ -24,8 +24,8 @@ pipeline
             steps
             {
                 echo 'Push Docker Image'
-                bat 'docker tag kubedemoapp:v1 srithu/sample:v1'
-                bat 'docker push srithu/sample:v1'
+                bat 'docker tag kubedemoapp:v1 srithu/sample:kubeimage1'
+                bat 'docker push srithu/sample:kubeimage1'
             }
         }
         stage('Run in Kubernetes')
@@ -33,12 +33,12 @@ pipeline
             steps
             {
                 echo 'Run application in Kubernetes'
-                bat 'kubectl apply -f deployment.yaml validate=False --regret-tls-verify'
-                bat 'kubectl apply -f service.yaml --regret-tls-verify'
+                bat 'kubectl apply -f deployment.yaml --validate=false --insecure-skip-tls-verify'
+                bat 'kubectl apply -f service.yaml --insecure-skip-tls-verify'
             }
         }
     }
-    
+
     post
     {
         success
