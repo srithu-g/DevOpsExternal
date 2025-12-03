@@ -7,14 +7,13 @@ spec:
   selector:
     matchLabels:
       app: kubedemoapp
-    template:
-      metadata:
-        labels:
-          app: kubedemoapp
-    containers:
-      - name: kubedemoapp
-        image: srithu/kubedemoapp:sample
-        ports:
-        - containerPort: 5000
-    --type : NodePort
-
+  template:
+    metadata:
+      labels:
+        app: kubedemoapp
+    spec:
+      containers:
+        - name: kubedemoapp
+          image: srithu/sample:kubeimage1
+          ports:
+            - containerPort: 5000
