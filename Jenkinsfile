@@ -17,7 +17,6 @@ pipeline
             {
                 echo 'Login to Docker'
                     bat 'docker login -u srithu -p Docker@123'
-                }
             }
         }
         stage('Push Docker image')
@@ -38,20 +37,21 @@ pipeline
                 bat 'kubectl apply -f service.yaml --regret-tls-verify'
             }
         }
-        post
+    }
+    
+    post
+    {
+        success
         {
-            success
-            {
-                echo 'Pipeline Succeeded'
-            }
-            failure
-            {
-                echo 'Pipeline Failed'
-            }
-            always
-            {
-                echo 'Pipeline Completed'
-            }
+            echo 'Pipeline Succeeded'
         }
-
+        failure
+        {
+            echo 'Pipeline Failed'
+        }
+        always
+        {
+            echo 'Pipeline Completed'
+        }
+    }
 }
